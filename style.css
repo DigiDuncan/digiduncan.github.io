@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'nasin-nanpa';
-  src: url('/fonts/nasin-nanpa.otf') format('truetype');
+  src: url('/fonts/nasin-nanpa.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
