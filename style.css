@@ -1,0 +1,65 @@
+@font-face {
+  font-family: 'nasin-nanpa';
+  src: url('../fonts/nasin-nanpa.otf') format('otf');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'eurofurence';
+  src: url('../fonts/eurof35.ttf') format('ttf');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'eurofurence';
+  src: url('../fonts/eurof36.ttf') format('ttf');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'eurofurence';
+  src: url('../fonts/eurof55.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'eurofurence';
+  src: url('../fonts/eurof56.ttf') format('ttf');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'eurofurence';
+  src: url('../fonts/eurof75.ttf') format('ttf');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'eurofurence';
+  src: url('../fonts/eurof76.ttf') format('ttf');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+body {
+  font-family: "eurofurence";
+  color: whitesmoke;
+  background: #044;
+}
+
+.sp {
+  font-family: "nasin-nanpa";
+}
