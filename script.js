@@ -1,3 +1,5 @@
+// LANGUAGE SWITCHER
+
 var saved_language = localStorage.getItem('language') || 'en';
 
 function lang_switch(new_lang) {
@@ -26,3 +28,19 @@ for (const element of lang_button_elements) {
     }
 
 lang_switch(saved_language);
+
+// AGE
+function get_age() {
+    const birthday = new Date("1999-03-10");
+
+    const age_ms = Date.now() - birthday.getTime();
+    const age_date = new Date(age_ms);
+    const age = age_date.getUTCFullYear() - 1970;
+
+    var age_elements = document.getElementsByClassName("age");
+    for (const element of age_elements) {
+        element.textContent = age;
+    }
+};
+
+get_age();
