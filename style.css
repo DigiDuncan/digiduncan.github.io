@@ -65,8 +65,28 @@ body {
   font-family: "eurofurence";
   color: whitesmoke;
   background: #044;
+  margin-left: 0.25em;
 }
 
 .sp {
   font-family: "nasin-nanpa";
+}
+
+header {
+  display: flex;
+  margin-left: auto;
+  margin-top: 5px;
+  margin-right: 5px;
+  position: absolute;
+  width: fit-content;
+  right: 0;
+  top: 0;
+}
+
+header button {
+  font-family: "eurofurence";
+}
+
+h1 {
+  margin-bottom: 0.33em;
 }
