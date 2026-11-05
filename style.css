@@ -54,6 +54,13 @@
   font-display: swap;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  /* Things will now color inside the lines */
+  box-sizing: border-box;
+}
+
 body {
   font-family: "eurofurence";
   color: whitesmoke;
