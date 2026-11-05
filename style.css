@@ -72,7 +72,7 @@ body {
   font-family: "nasin-nanpa";
 }
 
-header {
+.lang-button-header {
   display: flex;
   margin-left: auto;
   margin-top: 5px;
@@ -81,10 +81,15 @@ header {
   width: fit-content;
   right: 0;
   top: 0;
+  align-items: center;
 }
 
-header button {
+.lang-button-header button.lang-tp {
   font-family: "eurofurence";
+}
+
+.lang-button-header button.lang-en {
+  font-family: "nasin-nanpa";
 }
 
 h1 {
