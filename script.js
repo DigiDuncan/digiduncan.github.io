@@ -6,12 +6,12 @@ function lang_switch(new_lang) {
 
     const en_elements = document.getElementsByClassName('lang-en');
     for (const element of en_elements) {
-        element.style.display = new_lang === 'en' ? "block" : "none"
+        element.style.display = new_lang === 'en' ? "flex" : "none"
     }
 
     const tp_elements = document.getElementsByClassName('lang-tp');
     for (const element of tp_elements) {
-        element.style.display = new_lang === 'tp' ? "block" : "none"
+        element.style.display = new_lang === 'tp' ? "flex" : "none"
     }
 }
 
