@@ -1,5 +1,4 @@
 // LANGUAGE SWITCHER
-
 var saved_language = localStorage.getItem('language') || 'en';
 
 function lang_switch(new_lang) {
