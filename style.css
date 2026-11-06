@@ -78,6 +78,7 @@ body {
 
 .sp {
   font-family: "nasin-nanpa";
+  font-size: 75%;
 }
 
 .lang-button-header {
@@ -124,6 +125,7 @@ body {
 
 .lang-button-header button.lang-en {
   font-family: "nasin-nanpa";
+  font-size: 50%;
 }
 
 hgroup {
