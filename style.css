@@ -64,7 +64,7 @@
 body {
   font-family: "eurofurence";
   color: whitesmoke;
-  background: #044;
+  background: oklch(50% 0.14138 219.96);
   font-size: 175%;
 }
 
