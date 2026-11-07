@@ -65,7 +65,7 @@ body {
   font-family: "eurofurence";
   color: whitesmoke;
   background: #044;
-  font-size: 150%;
+  font-size: 175%;
 }
 
 .material-symbols-outlined {
@@ -103,7 +103,6 @@ body {
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
-	font-family:Arial;
 	font-size:15px;
 	font-weight:bold;
 	padding:6px 8px;
@@ -121,11 +120,12 @@ body {
 
 .lang-button-header button.lang-tp {
   font-family: "eurofurence";
+  font-size: 1.5rem;
 }
 
 .lang-button-header button.lang-en {
   font-family: "nasin-nanpa";
-  font-size: 50%;
+  font-size: 1rem;
 }
 
 hgroup {
@@ -141,14 +141,14 @@ hgroup p {
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 4rem;
   align-items: baseline;
 }
 
 h1 *.small {
   font-weight: normal;
   vertical-align: text-bottom;
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 .main {
