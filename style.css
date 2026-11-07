@@ -1,3 +1,12 @@
+:root {
+  --digi-blue: oklch(78.5% 0.14 220); /* #0FCDF7 */
+  --bg-color: oklch(50% 0.14 220);
+  --hover-color: oklch(100% 0.14 220);
+  --highlight-color: oklch(100% 0.14 60);
+  --text-color: whitesmoke;
+  --subtitle-color: #aaaaaa;
+}
+
 @font-face {
   font-family: 'nasin-nanpa';
   src: url('/fonts/nasin-nanpa.otf') format('opentype');
@@ -63,8 +72,8 @@
 
 body {
   font-family: "eurofurence";
-  color: whitesmoke;
-  background: oklch(50% 0.14138 219.96);
+  color: var(--text-color);
+  background: var(--bg-color);
   font-size: 175%;
 }
 
@@ -137,7 +146,7 @@ hgroup {
 }
 
 hgroup p {
-  color:#aaa
+  color: var(--subtitle-color);
 }
 
 h1 {
@@ -154,4 +163,24 @@ h1 *.small {
 .main {
   padding-left: 0.25em;
   max-width: 80%;
+}
+
+.social-icons {
+  padding-top: 0.5rem;
+}
+
+.social-icons a:link {
+  color: var(--text-color)
+}
+
+.social-icons a:visited {
+  color: var(--text-color)
+}
+
+.social-icons a:focus {
+  color: var(--highlight-color)
+}
+
+.social-icons a:hover {
+  color: var(--hover-color)
 }
