@@ -88,16 +88,32 @@ body {
   'opsz' 24
 }
 
+.main div{
+  flex-direction: column;
+}
+
 .sp {
   font-family: "nasin-nanpa";
   font-size: 75%;
 }
 
+/* .main .sl {
+  display: none;
+}
+
+.main .lang-tp:hover .sp {
+  display: none;
+}
+
+.main .lang-tp:hover .sl {
+  display: flex;
+} */
+
 .lang-button-header {
   display: flex;
   margin-left: auto;
-  margin-top: 5px;
-  margin-right: 5px;
+  margin-top: 10px;
+  margin-right: 10px;
   position: absolute;
   width: fit-content;
   right: 0;
