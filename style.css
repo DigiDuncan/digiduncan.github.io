@@ -157,11 +157,17 @@ main {
 
 main div{
   flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .sp {
   font-family: "nasin-nanpa";
   font-size: 75%;
+}
+
+main br {
+  flex-basis: 100%;
+  height: 0;
 }
 
 /* main .sl {
