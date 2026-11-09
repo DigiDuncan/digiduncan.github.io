@@ -160,6 +160,10 @@ main div{
   flex-wrap: wrap;
 }
 
+main p{
+  margin-bottom: 1em;
+}
+
 .sp {
   font-family: "nasin-nanpa";
   font-size: 75%;
