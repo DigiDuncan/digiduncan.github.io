@@ -90,6 +90,11 @@ body {
   min-height: 100dvh;
 }
 
+.sp {
+  font-family: "nasin-nanpa";
+  font-size: 0.75em;
+}
+
 hgroup {
   width: 100%;
   margin-bottom: 0.5em;
@@ -111,6 +116,15 @@ h1 *.small {
   font-weight: normal;
   vertical-align: text-bottom;
   font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+  align-items: baseline;
+}
+
+h2.sp {
+  font-size: 2rem;
 }
 
 .subheader {
@@ -164,13 +178,19 @@ main p:not(:last-child){
   margin-bottom: 1em;
 }
 
-rt {
-  font-family: "eurofurence";
+figure {
+  border-left: 4px solid var(--highlight-color);
+  margin-left: 0.5em;
+  padding-left: 0.5em;
 }
 
-.sp {
-  font-family: "nasin-nanpa";
+figcaption {
   font-size: 75%;
+  font-style: italic;
+}
+
+rt {
+  font-family: "eurofurence";
 }
 
 /* main .sl {
@@ -254,7 +274,7 @@ main .lang-tp:hover .sl {
 
 footer {
   padding-left: 0.5rem;
-  font-size: 75%;
+  font-size: 50%;
   font-style: italic;
   color: var(--subtitle-color);
   flex-grow: 1;
