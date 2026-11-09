@@ -160,8 +160,12 @@ main div{
   flex-wrap: wrap;
 }
 
-main p{
+main p:not(:last-child){
   margin-bottom: 1em;
+}
+
+rt {
+  font-family: "eurofurence";
 }
 
 .sp {
