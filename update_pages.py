@@ -53,7 +53,7 @@ for page in html_files:
         "$DESC": desc,
         "$MM": now.format("MM"),
         "$DD": now.format("DD"),
-        "$YYYY": now.format("YY")
+        "$YYYY": now.format("YYYY")
     }
 
     main_match = re.search(RE_MAIN, doc)
