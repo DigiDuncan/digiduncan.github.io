@@ -78,5 +78,4 @@ for page in html_files:
     for rk, rv in replacements.items():
         out = out.replace(rk, rv)
 
-    test_file = site_directory / "test.htm"
-    test_file.write_text(out)
+    page.write_text(out)
