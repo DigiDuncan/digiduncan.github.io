@@ -99,10 +99,10 @@ body {
 }
 
 hgroup {
-  width: 100%;
   margin-bottom: 0.5em;
   background-color: #00000044;
-  padding-left: 1em;
+  padding-left: 10%;
+  padding-right: 10%;
   padding-bottom: 0.5em;
   padding-top: 0.5em;
 }
@@ -185,8 +185,8 @@ nav li:has(a):hover a{
 }
 
 main {
-  padding-left: 1em;
-  max-width: 80%;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 main div{
@@ -297,7 +297,8 @@ main .lang-tp:hover .sl {
 }
 
 footer {
-  padding-left: 0.5rem;
+  padding-left: 10%;
+  padding-bottom: 0.5em;
   font-size: 50%;
   font-style: italic;
   color: var(--subtitle-color);
@@ -312,11 +313,10 @@ footer {
   width: 100%;
   padding: 0.5em;
   margin-bottom: 1em;
-  background-color: #00000044;
+  background-color: var(--button-bg-color);
 }
 
 .articles .post-date {
-  color: var(--subtitle-color);
   font-size: smaller;
   font-style: italic;
 }
