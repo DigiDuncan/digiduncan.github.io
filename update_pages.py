@@ -1,5 +1,5 @@
-from dataclasses import dataclass
 import re
+from dataclasses import dataclass
 from pathlib import Path
 
 import arrow
@@ -73,17 +73,17 @@ def generate_blog_posts():
     for post in all_posts:
         print(f"Generating blog post {post.stem}")
 
-        en_doc = post.read_text()
+        en_doc = post.read_text(encoding = "utf-8")
         en_html = markdown.markdown(en_doc, extensions = md_extensions, tab_length = 4)
         en_soup = BeautifulSoup(en_html, "html.parser")
 
         tp_path = posts_tp_directory / post.name
         if tp_path.exists():
-            tp_doc = tp_path.read_text()
+            tp_doc = tp_path.read_text(encoding = "utf-8")
             tp_html = markdown.markdown(tp_doc, extensions = md_extensions, tab_length = 4)
         else:
             tp_path = site_directory / "templates" / "no_tp.html"
-            tp_html = tp_path.read_text()
+            tp_html = tp_path.read_text(encoding = "utf-8")
         tp_soup = BeautifulSoup(tp_html, "html.parser")
 
         out = (f"<!--{post.stem}-->\n"
@@ -98,7 +98,7 @@ def generate_blog_posts():
         )
 
         new_path = blog_directory / (post.stem + ".html")
-        new_path.write_text(out)
+        new_path.write_text(out, encoding = "utf-8")
 
         # TODO: NOT DONE
         # posts.append(Post(f"/blog/{post.stem}.html", ))
@@ -108,7 +108,7 @@ def update_template():
     html_files = [h for h in all_html_files if h.parent.stem != "templates"]
 
     for page in html_files:
-        doc = page.read_text()
+        doc = page.read_text(encoding = "utf-8")
         soup = BeautifulSoup(doc, 'html.parser')
 
         # Get top two comments
@@ -122,13 +122,13 @@ def update_template():
         # Get the templates
 
         head = site_directory / "templates" / "head.html"
-        head_doc = head.read_text()
+        head_doc = head.read_text(encoding = "utf-8")
 
         header = site_directory / "templates" / "header.html"
-        header_doc = header.read_text()
+        header_doc = header.read_text(encoding = "utf-8")
 
         footer = site_directory / "templates" / "footer.html"
-        footer_doc = footer.read_text()
+        footer_doc = footer.read_text(encoding = "utf-8")
 
         # Replacements
         replacements = {
@@ -161,7 +161,7 @@ def update_template():
         for rk, rv in replacements.items():
             out = out.replace(rk, rv)
 
-        page.write_text(out)
+        page.write_text(out, encoding = "utf-8")
 
 def main():
     generate_blog_posts()
