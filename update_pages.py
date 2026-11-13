@@ -3,7 +3,9 @@ from pathlib import Path
 
 import arrow
 import markdown
-import pymdownx
+import pymdownx.blocks.admonition
+import pymdownx.extra
+import pymdownx.superfences
 from bs4 import BeautifulSoup, Comment
 from bs4.formatter import HTMLFormatter
 
@@ -12,8 +14,6 @@ formatter = HTMLFormatter(indent=4)
 # Get all HTML files that aren't the templates
 current_file_path = Path(__file__).resolve()
 site_directory = current_file_path.parent
-all_html_files = site_directory.glob("**/*.html")
-html_files = [h for h in all_html_files if h.parent.stem != "templates"]
 
 now = arrow.now()
 
@@ -27,11 +27,28 @@ def indent(s: str, level = 0):
     return "\n".join(new_lines)
 
 def generate_blog_posts():
-    posts_en_directory = current_file_path.parent / "posts" / "en"
-    posts_tp_directory = current_file_path.parent / "posts" / "tp"
+    posts_en_directory = site_directory / "posts" / "en"
+    posts_tp_directory = site_directory / "posts" / "tp"
+    blog_directory = site_directory / "blog"
 
+    all_posts = posts_en_directory.glob("*.md")
+    for post in all_posts:
+        doc = post.read_text()
+        html = markdown.markdown(doc,
+                                 extensions = [pymdownx.extra.ExtraExtension(),
+                                               pymdownx.superfences.SuperFencesCodeExtension(),
+                                               pymdownx.blocks.admonition.AdmonitionExtension()],
+                                 tab_length = 4)
+
+        out = f"<!--{post.stem}-->    <main>\n" + indent(html, 2) + "\n    </main>\n"
+
+        new_path = blog_directory / (post.stem + ".html")
+        new_path.write_text(out)
 
 def update_template():
+    all_html_files = site_directory.glob("**/*.html")
+    html_files = [h for h in all_html_files if h.parent.stem != "templates"]
+
     for page in html_files:
         doc = page.read_text()
         soup = BeautifulSoup(doc, 'html.parser')
@@ -40,7 +57,7 @@ def update_template():
         # https://stackoverflow.com/questions/33138937/how-to-find-all-comments-with-beautiful-soup
         comments = soup.find_all(string=lambda text: isinstance(text, Comment))
         name = comments[0].strip()
-        desc = comments[1].strip()
+        desc = comments[1].strip() if len(comments) > 1 else "No description is available for this page."
 
         print("Processing", name)
 
