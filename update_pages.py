@@ -1,10 +1,10 @@
 import re
 from pathlib import Path
-from textwrap import dedent
 
 import arrow
 import markdown
 import pymdownx.blocks.admonition
+import pymdownx.bracketspan
 import pymdownx.extra
 import pymdownx.superfences
 from bs4 import BeautifulSoup, Comment
@@ -47,7 +47,8 @@ def generate_blog_posts():
             tp_html = markdown.markdown(tp_doc,
                                         extensions = [pymdownx.extra.ExtraExtension(),
                                                     pymdownx.superfences.SuperFencesCodeExtension(),
-                                                    pymdownx.blocks.admonition.AdmonitionExtension()],
+                                                    pymdownx.blocks.admonition.AdmonitionExtension(),
+                                                    pymdownx.bracketspan.BracketSpanExtension()],
                                         tab_length = 4)
         else:
             tp_path = site_directory / "templates" / "no_tp.html"
