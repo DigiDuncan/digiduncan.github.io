@@ -2,10 +2,12 @@ import re
 from pathlib import Path
 
 import arrow
+import markdown
+import pymdownx
 from bs4 import BeautifulSoup, Comment
 from bs4.formatter import HTMLFormatter
 
-formatter = HTMLFormatter(indent=4, )
+formatter = HTMLFormatter(indent=4)
 
 # Get all HTML files that aren't the templates
 current_file_path = Path(__file__).resolve()
@@ -24,58 +26,71 @@ def indent(s: str, level = 0):
         new_lines.append("    " * level + l)
     return "\n".join(new_lines)
 
-for page in html_files:
-    doc = page.read_text()
-    soup = BeautifulSoup(doc, 'html.parser')
+def generate_blog_posts():
+    posts_en_directory = current_file_path.parent / "posts" / "en"
+    posts_tp_directory = current_file_path.parent / "posts" / "tp"
 
-    # Get top two comments
-    # https://stackoverflow.com/questions/33138937/how-to-find-all-comments-with-beautiful-soup
-    comments = soup.find_all(string=lambda text: isinstance(text, Comment))
-    name = comments[0].strip()
-    desc = comments[1].strip()
 
-    print("Processing", name)
+def update_template():
+    for page in html_files:
+        doc = page.read_text()
+        soup = BeautifulSoup(doc, 'html.parser')
 
-    # Get the templates
+        # Get top two comments
+        # https://stackoverflow.com/questions/33138937/how-to-find-all-comments-with-beautiful-soup
+        comments = soup.find_all(string=lambda text: isinstance(text, Comment))
+        name = comments[0].strip()
+        desc = comments[1].strip()
 
-    head = site_directory / "templates" / "head.html"
-    head_doc = head.read_text()
+        print("Processing", name)
 
-    header = site_directory / "templates" / "header.html"
-    header_doc = header.read_text()
+        # Get the templates
 
-    footer = site_directory / "templates" / "footer.html"
-    footer_doc = footer.read_text()
+        head = site_directory / "templates" / "head.html"
+        head_doc = head.read_text()
 
-    # Replacements
-    replacements = {
-        "$NAME": name,
-        "$DESC": desc,
-        "$MM": now.format("MM"),
-        "$DD": now.format("DD"),
-        "$YYYY": now.format("YYYY")
-    }
+        header = site_directory / "templates" / "header.html"
+        header_doc = header.read_text()
 
-    main_match = re.search(RE_MAIN, doc)
-    if not main_match:
-        print("No main found!")
-        continue
+        footer = site_directory / "templates" / "footer.html"
+        footer_doc = footer.read_text()
 
-    main_text = main_match.group(0)
+        # Replacements
+        replacements = {
+            "$NAME": name,
+            "$DESC": desc,
+            "$MM": now.format("MM"),
+            "$DD": now.format("DD"),
+            "$YYYY": now.format("YYYY")
+        }
 
-    out = "<!--$NAME-->\n<!--$DESC-->\n"
-    out += head_doc
-    out += "<body>\n"
-    out += indent(header_doc, 1)
-    out += "\n"
-    out += main_text + "\n"
-    out += indent(footer_doc, 1)
-    out += "\n"
-    out += indent("</body>", 1)
-    out += "\n"
-    out += "</html>\n"
+        main_match = re.search(RE_MAIN, doc)
+        if not main_match:
+            print("No main found!")
+            continue
 
-    for rk, rv in replacements.items():
-        out = out.replace(rk, rv)
+        main_text = main_match.group(0)
 
-    page.write_text(out)
+        out = "<!--$NAME-->\n<!--$DESC-->\n"
+        out += head_doc
+        out += "<body>\n"
+        out += indent(header_doc, 1)
+        out += "\n"
+        out += main_text + "\n"
+        out += indent(footer_doc, 1)
+        out += "\n"
+        out += indent("</body>", 1)
+        out += "\n"
+        out += "</html>\n"
+
+        for rk, rv in replacements.items():
+            out = out.replace(rk, rv)
+
+        page.write_text(out)
+
+def main():
+    generate_blog_posts()
+    update_template()
+
+if __name__ == "__main__":
+    main()

@@ -217,17 +217,9 @@ rt {
   font-family: "eurofurence";
 }
 
-/* main .sl {
-  display: none;
+main .sl {
+  font-family: "eurofurence";
 }
-
-main .lang-tp:hover .sp {
-  display: none;
-}
-
-main .lang-tp:hover .sl {
-  display: flex;
-} */
 
 .lang-button-header {
   display: flex;
@@ -314,6 +306,10 @@ footer {
   padding: 0.5em;
   margin-bottom: 1em;
   background-color: var(--button-bg-color);
+}
+
+.articles h2 {
+  text-decoration: underline;
 }
 
 .articles .post-date {
