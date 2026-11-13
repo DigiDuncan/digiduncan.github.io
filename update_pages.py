@@ -28,8 +28,18 @@ md_extensions = [pymdownx.extra.ExtraExtension(),
 def indent(s: str, level = 0):
     lines = s.splitlines()
     new_lines = []
+    in_a_code_block = False
     for l in lines:
-        new_lines.append("    " * level + l)
+        if l.endswith("</pre>"):
+            in_a_code_block = False
+
+        if not in_a_code_block:
+            new_lines.append("    " * level + l)
+        else:
+            new_lines.append(l)
+
+        if l.startswith("<pre"):
+            in_a_code_block = True
     return "\n".join(new_lines)
 
 def generate_blog_posts():
