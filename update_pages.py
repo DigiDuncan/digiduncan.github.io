@@ -20,6 +20,11 @@ now = arrow.now()
 
 RE_MAIN = re.compile(r" *<main>.*<\/main>", re.DOTALL)
 
+md_extensions = [pymdownx.extra.ExtraExtension(),
+                pymdownx.superfences.SuperFencesCodeExtension(),
+                pymdownx.blocks.admonition.AdmonitionExtension(),
+                pymdownx.bracketspan.BracketSpanExtension()]
+
 def indent(s: str, level = 0):
     lines = s.splitlines()
     new_lines = []
@@ -35,21 +40,12 @@ def generate_blog_posts():
     all_posts = posts_en_directory.glob("*.md")
     for post in all_posts:
         en_doc = post.read_text()
-        en_html = markdown.markdown(en_doc,
-                                 extensions = [pymdownx.extra.ExtraExtension(),
-                                               pymdownx.superfences.SuperFencesCodeExtension(),
-                                               pymdownx.blocks.admonition.AdmonitionExtension()],
-                                 tab_length = 4)
+        en_html = markdown.markdown(en_doc, extensions = md_extensions, tab_length = 4)
 
         tp_path = posts_tp_directory / post.name
         if tp_path.exists():
             tp_doc = tp_path.read_text()
-            tp_html = markdown.markdown(tp_doc,
-                                        extensions = [pymdownx.extra.ExtraExtension(),
-                                                    pymdownx.superfences.SuperFencesCodeExtension(),
-                                                    pymdownx.blocks.admonition.AdmonitionExtension(),
-                                                    pymdownx.bracketspan.BracketSpanExtension()],
-                                        tab_length = 4)
+            tp_html = markdown.markdown(tp_doc, extensions = md_extensions, tab_length = 4)
         else:
             tp_path = site_directory / "templates" / "no_tp.html"
             tp_html = tp_path.read_text()
