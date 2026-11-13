@@ -1,5 +1,6 @@
 import re
 from pathlib import Path
+from textwrap import dedent
 
 import arrow
 import markdown
@@ -33,14 +34,35 @@ def generate_blog_posts():
 
     all_posts = posts_en_directory.glob("*.md")
     for post in all_posts:
-        doc = post.read_text()
-        html = markdown.markdown(doc,
+        en_doc = post.read_text()
+        en_html = markdown.markdown(en_doc,
                                  extensions = [pymdownx.extra.ExtraExtension(),
                                                pymdownx.superfences.SuperFencesCodeExtension(),
                                                pymdownx.blocks.admonition.AdmonitionExtension()],
                                  tab_length = 4)
 
-        out = f"<!--{post.stem}-->    <main>\n" + indent(html, 2) + "\n    </main>\n"
+        tp_path = posts_tp_directory / post.name
+        if tp_path.exists():
+            tp_doc = tp_path.read_text()
+            tp_html = markdown.markdown(tp_doc,
+                                        extensions = [pymdownx.extra.ExtraExtension(),
+                                                    pymdownx.superfences.SuperFencesCodeExtension(),
+                                                    pymdownx.blocks.admonition.AdmonitionExtension()],
+                                        tab_length = 4)
+        else:
+            tp_path = site_directory / "templates" / "no_tp.html"
+            tp_html = tp_path.read_text()
+
+        out = (f"<!--{post.stem}-->\n"
+         "    <main>\n"
+         "        <div class=\"lang-en\">\n") +\
+                      indent(en_html, 3) + "\n" +\
+        ("        </div>\n"
+         "        <div class=\"lang-tp sp\">\n") +\
+                      indent(tp_html, 3) + "\n" +\
+        ("        </div>\n"
+         "    </main>\n"
+        )
 
         new_path = blog_directory / (post.stem + ".html")
         new_path.write_text(out)
