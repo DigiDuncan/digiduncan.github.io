@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 import re
 from pathlib import Path
 
@@ -30,9 +31,6 @@ def indent(s: str, level = 0):
     new_lines = []
     in_a_code_block = False
     for l in lines:
-        if l.endswith("</pre>"):
-            in_a_code_block = False
-
         if not in_a_code_block:
             new_lines.append("    " * level + l)
         else:
@@ -40,7 +38,31 @@ def indent(s: str, level = 0):
 
         if l.startswith("<pre"):
             in_a_code_block = True
+        elif l.endswith("</pre>"):
+            in_a_code_block = False
+
     return "\n".join(new_lines)
+
+def strip_html(soup: BeautifulSoup) -> str:
+    return soup.get_text(separator = " ", strip = True)
+
+def strip_markdown(text: str) -> str:
+    html = markdown.markdown(text)
+    soup = BeautifulSoup(html, "html.parser")
+    return strip_html(soup)
+
+@dataclass
+class Post:
+    url: str
+    en_title: str
+    tp_title: str
+    year: str
+    month: str
+    day: str
+    en_excerpt: str
+    tp_excerpt: str
+
+posts: list[Post] = []
 
 def generate_blog_posts():
     posts_en_directory = site_directory / "posts" / "en"
@@ -49,8 +71,11 @@ def generate_blog_posts():
 
     all_posts = posts_en_directory.glob("*.md")
     for post in all_posts:
+        print(f"Generating blog post {post.stem}")
+
         en_doc = post.read_text()
         en_html = markdown.markdown(en_doc, extensions = md_extensions, tab_length = 4)
+        en_soup = BeautifulSoup(en_html, "html.parser")
 
         tp_path = posts_tp_directory / post.name
         if tp_path.exists():
@@ -59,6 +84,7 @@ def generate_blog_posts():
         else:
             tp_path = site_directory / "templates" / "no_tp.html"
             tp_html = tp_path.read_text()
+        tp_soup = BeautifulSoup(tp_html, "html.parser")
 
         out = (f"<!--{post.stem}-->\n"
          "    <main>\n"
@@ -73,6 +99,9 @@ def generate_blog_posts():
 
         new_path = blog_directory / (post.stem + ".html")
         new_path.write_text(out)
+
+        # TODO: NOT DONE
+        # posts.append(Post(f"/blog/{post.stem}.html", ))
 
 def update_template():
     all_html_files = site_directory.glob("**/*.html")
