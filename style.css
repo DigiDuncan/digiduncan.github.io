@@ -350,3 +350,7 @@ div.error-404 p{
 main:has(div.error-404) {
   max-width: 100%
 }
+
+.smaller {
+  font-size: smaller;
+}

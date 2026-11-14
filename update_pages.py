@@ -1,3 +1,4 @@
+from functools import total_ordering
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -56,6 +57,7 @@ def strip_markdown(text: str) -> str:
     soup = BeautifulSoup(html, "html.parser")
     return strip_html(soup)
 
+@total_ordering
 @dataclass
 class Post:
     url: str
@@ -66,6 +68,9 @@ class Post:
     day: str
     en_excerpt: str
     tp_excerpt: str
+
+    def __lt__(self, other: "Post"):
+        return (self.year, self.month, self.day, self.en_title) < (other.year, other.month, other.day, other.en_title)
 
 posts: list[Post] = []
 
@@ -112,13 +117,16 @@ def generate_blog_posts():
             en_title_text = en_title.text
             en_title.decompose()
         else:
-            en_title = "No Title"
+            en_title_text = "No Title"
 
         if tp_title:
             tp_title_text = tp_title.text
             tp_title.decompose()
         else:
-            tp_title = "nimi ala"
+            tp_title_text = "nimi ala"
+
+        if tp_title_text == "toki&pona ala":
+            tp_title_text = f"toki&pona ala <span class=\"sl smaller\">({en_title_text})</span>"
 
         en_excerpt = strip_html(en_soup).replace("\n", " ")[:256]
         tp_excerpt = strip_html(tp_soup).replace("\n", " ")[:256]
@@ -129,6 +137,8 @@ def generate_blog_posts():
 
         posts.append(Post(f"/blog/{post.stem}.html", en_title_text, tp_title_text,
                           year, month, day, en_excerpt, tp_excerpt))
+
+    posts.sort(reverse = True)
 
 def make_post_page():
     template = site_directory / "templates" / "articles.html"
