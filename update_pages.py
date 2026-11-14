@@ -125,11 +125,12 @@ def generate_blog_posts():
         else:
             tp_title_text = "nimi ala"
 
-        if tp_title_text == "toki&pona ala":
-            tp_title_text = f"toki&pona ala <span class=\"sl smaller\">({en_title_text})</span>"
-
         en_excerpt = strip_html(en_soup).replace("\n", " ")[:256]
         tp_excerpt = strip_html(tp_soup).replace("\n", " ")[:256]
+
+        if tp_title_text == "toki&pona ala":
+            tp_title_text = f"toki&pona ala <span class=\"sl smaller\">({en_title_text})</span>"
+            tp_excerpt = f"<span class=\"sl\">({en_excerpt})</span>"
 
         year = post.stem[:4]
         month = post.stem[4:6]
