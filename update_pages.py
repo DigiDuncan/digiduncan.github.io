@@ -30,7 +30,7 @@ md_extensions = [pymdownx.extra.ExtraExtension(),
                 pymdownx.superfences.SuperFencesCodeExtension(),
                 pymdownx.blocks.admonition.AdmonitionExtension(),
                 pymdownx.bracketspan.BracketSpanExtension(),
-                pymdownx.quotes.QuotesExtension()]
+                pymdownx.quotes.QuotesExtension(callouts = True)]
 
 def indent(s: str, level = 0):
     lines = s.splitlines()
