@@ -7,6 +7,7 @@ import markdown
 import pymdownx.blocks.admonition
 import pymdownx.bracketspan
 import pymdownx.extra
+import pymdownx.quotes
 import pymdownx.superfences
 from bs4 import BeautifulSoup, Comment
 from bs4.formatter import HTMLFormatter
@@ -20,11 +21,15 @@ site_directory = current_file_path.parent
 now = arrow.now()
 
 RE_MAIN = re.compile(r" *<main>.*<\/main>", re.DOTALL)
+MONTHS = ["N/A", "January", "Feburary", "March", "April",
+          "May", "June", "July", "August", "September",
+          "October", "November", "December"]
 
 md_extensions = [pymdownx.extra.ExtraExtension(),
                 pymdownx.superfences.SuperFencesCodeExtension(),
                 pymdownx.blocks.admonition.AdmonitionExtension(),
-                pymdownx.bracketspan.BracketSpanExtension()]
+                pymdownx.bracketspan.BracketSpanExtension(),
+                pymdownx.quotes.QuotesExtension()]
 
 def indent(s: str, level = 0):
     lines = s.splitlines()
@@ -100,8 +105,81 @@ def generate_blog_posts():
         new_path = blog_directory / (post.stem + ".html")
         new_path.write_text(out, encoding = "utf-8")
 
-        # TODO: NOT DONE
-        # posts.append(Post(f"/blog/{post.stem}.html", ))
+        en_title = en_soup.find("h1")
+        tp_title = tp_soup.find("h1")
+
+        if en_title:
+            en_title_text = en_title.text
+            en_title.decompose()
+        else:
+            en_title = "No Title"
+
+        if tp_title:
+            tp_title_text = tp_title.text
+            tp_title.decompose()
+        else:
+            tp_title = "nimi ala"
+
+        en_excerpt = strip_html(en_soup).replace("\n", " ")[:256]
+        tp_excerpt = strip_html(tp_soup).replace("\n", " ")[:256]
+
+        year = post.stem[:4]
+        month = post.stem[4:6]
+        day = post.stem[6:8]
+
+        posts.append(Post(f"/blog/{post.stem}.html", en_title_text, tp_title_text,
+                          year, month, day, en_excerpt, tp_excerpt))
+
+def make_post_page():
+    template = site_directory / "templates" / "articles.html"
+    template_doc = template.read_text(encoding = "utf-8")
+
+    en_post_template = site_directory / "templates" / "en_blog_entry.html"
+    en_post_template_doc = en_post_template.read_text(encoding = "utf-8")
+
+    tp_post_template = site_directory / "templates" / "tp_blog_entry.html"
+    tp_post_template_doc = tp_post_template.read_text(encoding = "utf-8")
+
+    en_posts = []
+    tp_posts = []
+
+    for post in posts:
+        en_replacements = {
+            "$URL": post.url,
+            "$POSTTITLE": post.en_title,
+            "$PMM": MONTHS[int(post.month)],
+            "$PDD": post.day,
+            "$PYYYY": post.year,
+            "$POSTEXCERPT": post.en_excerpt
+        }
+
+        tp_replacements = {
+            "$URL": post.url,
+            "$POSTTITLE": post.tp_title,
+            "$PMM": post.month,
+            "$PDD": post.day,
+            "$PYYYY": post.year,
+            "$POSTEXCERPT": post.tp_excerpt
+        }
+
+        en_post = en_post_template_doc
+        tp_post = tp_post_template_doc
+
+        for k, v in en_replacements.items():
+            en_post = en_post.replace(k, v)
+
+        for k, v in tp_replacements.items():
+            tp_post = tp_post.replace(k, v)
+
+        en_posts.append(en_post)
+        tp_posts.append(tp_post)
+
+    en_posts_string = "\n".join(en_posts)
+    tp_posts_string = "\n".join(tp_posts)
+    template_doc = template_doc.replace("$EN_ARTICLES", indent(en_posts_string, 2)).replace("$TP_ARTICLES", indent(tp_posts_string, 2))
+
+    final_path = site_directory / "blog" / "index.html"
+    final_path.write_text(indent(template_doc, 1), encoding = "utf-8")
 
 def update_template():
     all_html_files = site_directory.glob("**/*.html")
@@ -165,6 +243,7 @@ def update_template():
 
 def main():
     generate_blog_posts()
+    make_post_page()
     update_template()
 
 if __name__ == "__main__":
