@@ -308,7 +308,13 @@ footer {
   background-color: var(--button-bg-color);
 }
 
-.articles h2 {
+.articles a {
+  color: var(--text-color);
+  text-decoration: underline;
+}
+
+.articles a:visited {
+  color: var(--text-color);
   text-decoration: underline;
 }
 
