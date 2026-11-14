@@ -130,7 +130,7 @@ def generate_blog_posts():
 
         if tp_title_text == "toki&pona ala":
             tp_title_text = f"toki&pona ala <span class=\"sl smaller\">({en_title_text})</span>"
-            tp_excerpt = f"<span class=\"sl\">({en_excerpt})</span>"
+            tp_excerpt = f"<span class=\"sl\">{en_excerpt}</span>"
 
         year = post.stem[:4]
         month = post.stem[4:6]
