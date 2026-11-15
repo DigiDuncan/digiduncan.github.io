@@ -1,6 +1,6 @@
-from functools import total_ordering
 import re
 from dataclasses import dataclass
+from functools import total_ordering
 from pathlib import Path
 
 import arrow
@@ -42,9 +42,9 @@ def indent(s: str, level = 0):
         else:
             new_lines.append(l)
 
-        if l.startswith("<pre"):
+        if "<pre" in l:
             in_a_code_block = True
-        elif l.endswith("</pre>"):
+        elif "</pre>" in l:
             in_a_code_block = False
 
     return "\n".join(new_lines)
