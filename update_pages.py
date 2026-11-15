@@ -96,20 +96,6 @@ def generate_blog_posts():
             tp_html = tp_path.read_text(encoding = "utf-8")
         tp_soup = BeautifulSoup(tp_html, "html.parser")
 
-        out = (f"<!--{post.stem}-->\n"
-         "    <main>\n"
-         "        <div class=\"lang-en\">\n") +\
-                      indent(en_html, 3) + "\n" +\
-        ("        </div>\n"
-         "        <div class=\"lang-tp sp\">\n") +\
-                      indent(tp_html, 3) + "\n" +\
-        ("        </div>\n"
-         "    </main>\n"
-        )
-
-        new_path = blog_directory / (post.stem + ".html")
-        new_path.write_text(out, encoding = "utf-8")
-
         en_title = en_soup.find("h1")
         tp_title = tp_soup.find("h1")
 
@@ -138,6 +124,20 @@ def generate_blog_posts():
 
         posts.append(Post(f"/blog/{post.stem}.html", en_title_text, tp_title_text,
                           year, month, day, en_excerpt, tp_excerpt))
+
+        out = (f"<!--{en_title_text}-->\n"
+                 "    <main>\n"
+                 "        <div class=\"lang-en\">\n") +\
+                              indent(en_html, 3) + "\n" +\
+                ("        </div>\n"
+                 "        <div class=\"lang-tp sp\">\n") +\
+                              indent(tp_html, 3) + "\n" +\
+                ("        </div>\n"
+                 "    </main>\n"
+                )
+
+        new_path = blog_directory / (post.stem + ".html")
+        new_path.write_text(out, encoding = "utf-8")
 
     posts.sort(reverse = True)
 
