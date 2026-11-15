@@ -387,6 +387,8 @@ code {
 
 .highlight {
   background: var(--dark-bg-color);
+  border-radius: var(--border-radius);
+  padding: 0.25em;
   width: 50%;
 }
 
