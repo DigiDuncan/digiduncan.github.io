@@ -569,8 +569,33 @@ div.footnote li {
   margin-left: 1em;
 }
 
+.sp div.footnote li {
+  margin-left: 0.5em;
+}
+
 hr {
   margin-bottom: 0.5em;
   border: none;
   border-top: 2px solid #ffffff;
+}
+
+.sp ol {
+  list-style: none;
+  counter-reset: list-counter;
+  padding-left: 2em;
+}
+
+.sp ol > li {
+  counter-increment: list-counter;
+  position: relative;
+}
+
+.sp ol > li::before {
+  content: counter(list-counter) "la zz";
+  position: absolute;
+  left: -2em;
+}
+
+.sp code {
+  font-size: 1.25em;
 }
