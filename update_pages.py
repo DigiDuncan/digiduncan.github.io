@@ -125,8 +125,8 @@ def generate_blog_posts():
         else:
             tp_title_text = "nimi ala"
 
-        en_excerpt = strip_html(en_soup).replace("\n", " ")[:256]
-        tp_excerpt = strip_html(tp_soup).replace("\n", " ")[:256]
+        en_excerpt = strip_html(en_soup).replace("\n", " ")[:512]
+        tp_excerpt = strip_html(tp_soup).replace("\n", " ")[:512]
 
         if tp_title_text == "toki&pona ala":
             tp_title_text = f"toki&pona ala <span class=\"sl smaller\">({en_title_text})</span>"
