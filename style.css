@@ -1,13 +1,13 @@
 :root {
   --digi-blue: oklch(78.5% 0.14 220); /* #0FCDF7 */
   --dark-bg-color: oklch(40% 0.14 220);
-  --bg-color: oklch(50% 0.14 220);
-  --button-bg-color: oklch(60% 0.14 220);
-  --button-bg-hover-color: oklch(70% 0.14 220);
+  --bg-color: #00648a;
+  --button-bg-color: oklch(50% 0.14 220);
+  --button-bg-hover-color: oklch(66% 0.14 220);
   --hover-color: oklch(100% 0.14 220);
   --highlight-color: oklch(100% 0.14 60);
-  --text-color: whitesmoke;
-  --subtitle-color: #aaaaaa;
+  --text-color: hsl(0, 0%, 96%);
+  --subtitle-color: #cccccc;
   --border-radius: 10px;
 }
 
