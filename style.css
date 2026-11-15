@@ -386,16 +386,17 @@ code {
 }
 
 .highlight {
-  background: var(--dark-bg-color);
+  background: #202020;
+  color: #d0d0d0;
   border-radius: var(--border-radius);
-  padding: 0.25em;
+  padding: calc(0.25em - 2px);
+  border: 2px solid #808080;
   width: 50%;
 }
 
 /* Pygments */
 /* https://github.com/richleland/pygments-css/blob/master/native.css */
 .highlight .hll { background-color: #404040 }
-.highlight  { background: #202020; color: #d0d0d0 }
 .highlight .c { color: #999999; font-style: italic } /* Comment */
 .highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
 .highlight .esc { color: #d0d0d0 } /* Escape */
