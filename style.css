@@ -341,6 +341,7 @@ main .sl {
 }
 
 footer {
+  margin-top: 1em;
   padding-left: 10%;
   padding-bottom: 0.5em;
   font-size: 50%;
