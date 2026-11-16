@@ -223,6 +223,23 @@ main p:not(:last-child){
   margin-bottom: 1em;
 }
 
+main ul {
+  padding-inline-start: 1em;
+}
+
+main ul li {
+  font-size: larger;
+}
+
+main ul a {
+  font-size: smaller;
+  color: var(--text-color);
+}
+
+main ul .subtext {
+  font-size: 0.5em;
+}
+
 figure {
   border-left: 4px solid var(--highlight-color);
   margin-left: 0.5em;
