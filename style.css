@@ -151,7 +151,7 @@ h1 *.small {
 h2 {
   font-size: 2.5rem;
   align-items: baseline;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.25em;
 }
 
 h2.sp {
@@ -625,4 +625,16 @@ hr {
 
 .sp code {
   font-size: 1.25em;
+}
+
+.meta {
+  padding-left: 0.5em;
+  padding-bottom: 1em;
+  font-style: italic;
+  color: var(--subtitle-color)
+}
+
+h2:has(+ .meta) {
+  padding-bottom: 0em;
+  margin-bottom: 0em;
 }
