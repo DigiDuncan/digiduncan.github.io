@@ -225,7 +225,8 @@ def update_template():
             "$DESC": desc,
             "$MM": now.format("MM"),
             "$DD": now.format("DD"),
-            "$YYYY": now.format("YYYY")
+            "$YYYY": now.format("YYYY"),
+            "$PATH": str(page.relative_to(site_directory)).replace("\\", "/")
         }
 
         main_match = re.search(RE_MAIN, doc)
