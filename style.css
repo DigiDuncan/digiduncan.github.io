@@ -638,3 +638,75 @@ h2:has(+ .meta) {
   padding-bottom: 0em;
   margin-bottom: 0em;
 }
+
+.nimisin-table p {
+  margin-bottom: 0.25em !important;
+}
+
+.nimisin-table td.nimisin-data {
+  width: 0%;
+  white-space: nowrap;
+  padding-right: 0.5em;
+}
+
+.nimisin {
+  font-size: 5em;
+  text-align: center;
+}
+
+.nimisin-name {
+  margin-top: -1.5em;
+  text-align: center;
+  font-size: 2em;
+}
+
+.nimisin-author {
+  text-align: center;
+  font-style: italic;
+}
+
+.nimisin-desc {
+  padding-top: 1em;
+  vertical-align: top;
+}
+
+.nimisin-freq {
+  outline: 2px solid #ffffff80;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  text-align: center;
+}
+
+.obscure {
+  color: #C800DE;
+  outline: 4px solid #C800DE;
+  background-color: #721378;
+}
+
+.uncommon {
+  color: #D08700;
+  outline: 4px solid #D08700;
+  background-color: #733E0A;
+}
+
+.common {
+  color: #0084D1;
+  outline: 4px solid #0084D1;
+  background-color: #024A70;
+}
+
+.core {
+  color: #009966;
+  outline: 4px solid #009966;
+  background-color: #004F3B;
+}
+
+.sandbox {
+  color: #808080;
+  outline: 4px solid #808080;
+  background-color: #424242;
+}
