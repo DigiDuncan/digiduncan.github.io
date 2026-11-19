@@ -93,6 +93,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Fairfax Pona HD';
+  src: url('/fonts/fairfaxponahd.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
@@ -120,6 +128,11 @@ body {
 
 .sp {
   font-family: "nasin-nanpa";
+  font-size: 0.8em;
+}
+
+.spff {
+  font-family: "Fairfax Pona HD";
   font-size: 0.8em;
 }
 
